@@ -19,9 +19,6 @@ import java.util.List;
 
 /**
  * The interface Locker.
- *
- * @author zhangsen
- * @date 2019 -05-15
  */
 public interface Locker {
 
@@ -34,12 +31,30 @@ public interface Locker {
     boolean acquireLock(List<RowLock> rowLock) ;
 
     /**
-     * Un lock boolean.
+     * Release lock boolean.
      *
      * @param rowLock the row lock
      * @return the boolean
      */
     boolean releaseLock(List<RowLock> rowLock);
+
+    /**
+     * Release lock boolean.
+     *
+     * @param xid      the xid
+     * @param branchId the branch id
+     * @return the boolean
+     */
+    boolean releaseLock(String xid, Long branchId);
+
+    /**
+     * Release lock boolean.
+     *
+     * @param xid       the xid
+     * @param branchIds the branch ids
+     * @return the boolean
+     */
+    boolean releaseLock(String xid, List<Long> branchIds);
 
     /**
      * Is lockable boolean.
@@ -50,9 +65,7 @@ public interface Locker {
     boolean isLockable(List<RowLock> rowLock);
 
     /**
-     * Clean all locks boolean.
-     *
-     * @return the boolean
+     * Clean all locks.
      */
     void cleanAllLocks();
 }
